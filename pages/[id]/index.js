@@ -15,10 +15,10 @@ const PetPage = ({ pet }) => {
       await fetch(`/api/pets/${petID}`, {
         method: 'Delete',
       })
-      router.push('/')
     } catch (error) {
       setMessage('Failed to delete the pet.')
     }
+    router.push('/')
   }
 
   return (
@@ -29,7 +29,14 @@ const PetPage = ({ pet }) => {
         <div className="main-content">
           <p className="pet-name">{pet.name}</p>
           <p className="owner">Owner: {pet.owner_name}</p>
-
+          <div className="diet info">
+              <p className="label">Diet</p>
+              <ul>
+                {pet.diet.map((data, index) => (
+                  <li key={index}>{data} </li>
+                ))}
+              </ul>
+            </div>
           {/* Extra Pet Info: Likes and Dislikes */}
           <div className="likes info">
             <p className="label">Likes</p>

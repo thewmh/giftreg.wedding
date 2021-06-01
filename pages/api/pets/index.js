@@ -17,7 +17,8 @@ export default async function handler(req, res) {
       break
     case 'POST':
       try {
-        const pet = await Pet.create(
+        const exists = await Pet.find({name: req.body.name});
+        const pet = exists.length != 0 ? null: await Pet.create(
           req.body
         ) /* create a new model in the database */
         res.status(201).json({ success: true, data: pet })
